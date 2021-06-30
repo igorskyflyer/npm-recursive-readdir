@@ -8,6 +8,8 @@
 
 ✅ Node **>= 0.5.0** required,
 
+✅ both class-based and function-based approaches available,
+
 ✅ recursive transversal,
 
 ✅ transversal maximum depth configurability,
