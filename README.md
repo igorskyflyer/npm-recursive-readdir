@@ -23,7 +23,7 @@
 
 ✅ recursive transversal,
 
-✅ transversal maximum depth configurability,
+✅ maximum depth of transversal configurability,
 
 ✅ file-only filtering,
 
