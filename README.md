@@ -4,6 +4,11 @@
 
 <br>
 
+> ❓ Did you know? 🤔
+> I've built this npm module because I needed a reliable and efficient npm module for listing directories while building another one of my projects, a Visual Studio Code extension called **[New Folder](https://github.com/igorskyflyer/vscode-new-folder)** and I needed to create a custom QuickPick dialog allowing the user to pick a root directory.
+
+<br>
+
 ### Features
 
 ✅ Node **>= 0.5.0** required,
