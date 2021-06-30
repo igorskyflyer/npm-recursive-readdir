@@ -2,7 +2,13 @@
 
 <br>
 
-📖 Provides advanced recursive readdir() and readdirSync() functions with high-level of Node-compatibility. 📁
+<p align="center">
+	<img src="https://github.com/igorskyflyer/npm-recursive-readdir/raw/main/assets/recursive-readdir.png" alt="Recursive-Readdir logo" witdth="180" height="180">
+</p>
+
+<br>
+
+📖 Provides advanced recursive readdir() and readdirSync() functions with high-level of Node-compatibility and much more. 📁
 
 <br>
 <br>
