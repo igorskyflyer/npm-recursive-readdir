@@ -19,6 +19,8 @@
 
 ✅ both class-based and function-based approaches available,
 
+✅ TypeScript ready, declaration files (`d.ts`) included,
+
 ✅ recursive transversal,
 
 ✅ transversal maximum depth configurability,
@@ -35,7 +37,7 @@
 
 ✅ multiple output formats,
 
-✅ custom predicate function,
+✅ custom filter function,
 
 ✅ async and sync methods available,
 
