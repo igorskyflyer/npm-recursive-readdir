@@ -6,7 +6,7 @@
 
 ### Features
 
-✅ Node >=v0.1.21 required,
+✅ Node **>= 0.1.21** required,
 
 ✅ recursive transversal,
 
