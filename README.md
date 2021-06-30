@@ -39,4 +39,6 @@
 
 ✅ async and sync methods available,
 
+✅ path-safety, see [uPath](https://www.npmjs.com/package/@igor.dvlpr/upath),
+
 ✅ universal paths supported, see [uPath](https://www.npmjs.com/package/@igor.dvlpr/upath). 🎉
