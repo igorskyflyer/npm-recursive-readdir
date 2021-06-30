@@ -1,5 +1,7 @@
 ## 🔁 Recursive `readdir()`
 
+<br>
+
 📖 Provides advanced recursive readdir() and readdirSync() functions with high-level of Node-compatibility. 📁
 
 <br>
