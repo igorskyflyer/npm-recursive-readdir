@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"description": "Provides recursive readdir() and readdirSync() functions. ",
 	"main": "index.js",
+	"types": "./dist/index.d.ts",
 	"scripts": {
 		"test": "mocha --slow 0",
 		"dts": "tsc",
