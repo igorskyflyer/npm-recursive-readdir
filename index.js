@@ -236,14 +236,6 @@ class RecursiveDir {
   }
 }
 
-console.log(
-  readDirSync('./test/testing', {
-    filter: (path, isDirectory) => {
-      return isDirectory
-    },
-  })
-)
-
 module.exports = {
   readDirSync,
   readDir,
