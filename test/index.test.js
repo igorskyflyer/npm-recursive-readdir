@@ -1,5 +1,6 @@
+/* eslint-disable no-undef */
 const chai = require('chai').assert
-const { readDirSync, readDir } = require('../index')
+const { readDirSync } = require('../index')
 const testingPath = './test/testing'
 
 describe('recursive-readdir tests', () => {
@@ -26,7 +27,7 @@ describe('recursive-readdir tests', () => {
 
     it('readDirSync("/testing", predicate<filter>) should return 1', () => {
       const actual = readDirSync(testingPath, {
-        filter: (path, isDirectory) => {
+        filter: (path) => {
           return path.indexOf('.bin') > -1
         },
       })
@@ -46,7 +47,7 @@ describe('recursive-readdir tests', () => {
 
     it('readDirSync("/testing", predicate<filter(.bin)>) should return sample.bin', () => {
       const actual = readDirSync(testingPath, {
-        filter: (path, isDirectory, wasSkipped) => {
+        filter: (path) => {
           return path.indexOf('.bin') > -1
         },
       })
