@@ -9,7 +9,7 @@
 <br>
 
 <p align="center">
-  <img src="https://github.com/igorskyflyer/npm-recursive-readdir/actions/workflows/action.yaml/badge.svg?branch=main">
+  <img src="https://github.com/igorskyflyer/npm-recursive-readdir/workflows/tests/badge.svg">
 </p>
 
 <br>
