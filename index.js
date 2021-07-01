@@ -13,7 +13,7 @@ const RootFolder = 0
  * @returns {boolean}
  */
 
-/**
+/** RecursiveDirEntries type used for showEntries property.
  * @enum {number}
  */
 const RecursiveDirEntries = {
@@ -25,7 +25,6 @@ const RecursiveDirEntries = {
 /**
  * Callback for a predicate that allows filtering file-system entries.
  * @typedef {Object} RecursiveDirOptions
- * @property {boolean} [prependRoot=true]
  * @property {FilterCallback} [filter]
  * @property {RecursiveDirEntries} [showEntries=RecursiveDirEntries.All]
  * @property {number} [maxDepth=All]
@@ -35,15 +34,14 @@ const RecursiveDirEntries = {
  * Default predicate for filtering.
  * Does nothing.
  * @private
- * @param {string} path
  * @returns {boolean}
  */
-function defaultPredicate(path) {
+function defaultPredicate() {
   return true
 }
 
 /**
- *
+ * Returns whether should we add the directory entry or not.
  * @private
  * @param {boolean} isDirectory
  * @param {RecursiveDirEntries} entries
@@ -59,6 +57,8 @@ function shouldPush(isDirectory, entries) {
 }
 
 /**
+ * Synchronously returns a list of files/directories.
+ * @private
  * @param {string} directory
  * @param {RecursiveDirOptions} options
  * @param {number} depth
@@ -150,63 +150,70 @@ function recursiveDirSync(directory, options, depth, files) {
 }
 
 /**
- *
- * @param {string} directory
- * @param {FilterCallback} filter
- * @param {RecursiveDirOptions} options
- * @returns {Promise<string[]|null>}
+ * Asynchronously gets files/directories inside the given directory.
+ * @param {string} directory the directory whose files/directories should be listed
+ * @param {RecursiveDirOptions} options additional options
+ * @returns {Promise<string[]|null>} returns Promise\<string[]\> or Promise\<null\>
  */
 async function readDir(directory, options) {
   return new Promise((resolve, reject) => {
-    resolve(recursiveDirSync(directory, options))
+    try {
+      resolve(recursiveDirSync(directory, options))
+    } catch (e) {
+      reject(e)
+    }
   })
 }
 
 /**
- * @param {string} directory
- * @param {RecursiveDirOptions} options
- * @returns {string[] | null}
+ * Synchronously gets files/directories inside the given directory.
+ * @param {string} directory the directory whose files/directories should be listed
+ * @param {RecursiveDirOptions} options additional options
+ * @returns {string[] | null} returns string[] or null if a fatal error has occurred
  */
 function readDirSync(directory, options) {
   return recursiveDirSync(directory, options)
 }
 
 /**
- * @private
- * @property {RecursiveDirOptions} options
+ * RecursiveDir class
  */
 class RecursiveDir {
   constructor() {
     this.options = {
-      prependRoot: true,
       maxDepth: AllFolders,
       filter: defaultPredicate,
       showEntries: RecursiveDirEntries.All,
     }
   }
 
+  /**
+   * Synchronously gets files/directories inside the given directory.
+   * @param {string} directory the directory whose files/directories should be listed
+   * @returns {string[] | null} returns string[] or null if a fatal error has occurred
+   */
   readDirSync(directory) {
     return recursiveDirSync(directory, this.options)
   }
 
-  async readDir(directory, filter) {
+  /**
+   * Asynchronously gets files/directories inside the given directory.
+   * @param {string} directory the directory whose files/directories should be listed
+   * @returns {Promise<string[]|null>} returns Promise\<string[]\> or Promise\<null\>
+   */
+  async readDir(directory) {
     return new Promise((resolve, reject) => {
-      resolve(recursiveDirSync(directory, this.options))
+      try {
+        resolve(recursiveDirSync(directory, this.options))
+      } catch (e) {
+        reject(e)
+      }
     })
   }
 
   /**
-   *
-   * @param {boolean} value
-   * @returns {RecursiveDir}
-   */
-  setPrependRoot(value) {
-    this.options.prependRoot = value
-    return this
-  }
-
-  /**
-   *
+   * Sets **showEntries** which controls whether to list files-only,
+   * directories-only or both (default).
    * @param {RecursiveDirEntries} value
    * @returns {RecursiveDir}
    */
@@ -216,7 +223,12 @@ class RecursiveDir {
   }
 
   /**
+   * Sets **maxDepth** which controls how many child folders'
+   * entries are being listed.
    *
+   * Provided const values are:
+   * -  AllFolders = -1 (default) - returns all subfolders,
+   * -  RootFolder = 0 - returns only root folder entries.
    * @param {number} value
    * @returns {RecursiveDir}
    */
@@ -226,7 +238,8 @@ class RecursiveDir {
   }
 
   /**
-   *
+   * Sets **filter** predicate used for filtering
+   * directory entries (directories/files)
    * @param {FilterCallback} value
    * @returns {RecursiveDir}
    */
