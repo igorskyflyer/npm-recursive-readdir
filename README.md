@@ -27,8 +27,6 @@
 
 ### Features
 
-✅ Node **>= 0.5.0** required,
-
 ✅ both class-based and function-based approaches available,
 
 ✅ TypeScript ready, declaration files (`d.ts`) included,
