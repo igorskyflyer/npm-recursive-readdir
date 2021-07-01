@@ -8,6 +8,12 @@
 
 <br>
 
+<p align="center">
+  <img src="https://github.com/igorskyflyer/npm-recursive-readdir/actions/workflows/action.yaml/badge.svg?branch=main">
+</p>
+
+<br>
+
 📖 Provides advanced recursive readdir() and readdirSync() functions with high-level of Node-compatibility and much more. 📁
 
 <br>
