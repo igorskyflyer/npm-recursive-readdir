@@ -59,12 +59,14 @@
 
 ### API
 
-- [function-based](#-function-based),
-- [class-based]()
+- [function-based](#λ-function-based),
+- [class-based](#-class-based)
 
 <br>
 
 #### λ function-based
+
+<br>
 
 ```js
 async function readDir(directory, options): Promise<string[]|null>
@@ -97,3 +99,5 @@ _**directory**_: `String` - the directory whose files/directories should be list
 _**options**_: `RecursiveDirOptions` - additional options.
 
 <br>
+
+#### 💎 class-based
