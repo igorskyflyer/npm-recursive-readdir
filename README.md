@@ -54,3 +54,46 @@
 ✅ path-safety, see [uPath](https://www.npmjs.com/package/@igor.dvlpr/upath),
 
 ✅ universal paths supported, see [uPath](https://www.npmjs.com/package/@igor.dvlpr/upath). 🎉
+
+<br>
+
+### API
+
+- [function-based](#-function-based),
+- [class-based]()
+
+<br>
+
+#### λ function-based
+
+```js
+async function readDir(directory, options): Promise<string[]|null>
+```
+
+Asynchronously gets files/directories inside the given directory.
+
+<br>
+
+**Params**
+
+_**directory**_: `String` - the directory whose files/directories should be listed,
+
+_**options**_: `RecursiveDirOptions` - additional options.
+
+<br>
+
+```js
+ function readDirSync(directory, options): string[]|null
+```
+
+Synchronously gets files/directories inside the given directory.
+
+<br>
+
+**Params**
+
+_**directory**_: `String` - the directory whose files/directories should be listed,
+
+_**options**_: `RecursiveDirOptions` - additional options.
+
+<br>
