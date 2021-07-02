@@ -3,7 +3,7 @@
 <br>
 
 <p align="center">
-	<img src="https://github.com/igorskyflyer/npm-recursive-readdir/raw/main/assets/recursive-readdir.png" alt="Recursive-Readdir logo" witdth="180" height="180">
+	<img src="https://github.com/igorskyflyer/npm-recursive-readdir/raw/main/assets/recursive-readdir.png" alt="Recursive-Readdir logo" width="180" height="180">
 </p>
 
 <br>
@@ -31,9 +31,9 @@
 
 ✅ TypeScript ready, declaration files (`d.ts`) included,
 
-✅ recursive transversal,
+✅ recursive traversal,
 
-✅ maximum depth of transversal configurability,
+✅ maximum depth of traversal configurability,
 
 ✅ file-only filtering,
 
@@ -69,7 +69,7 @@
 <br>
 
 ```js
-async function readDir(directory, options): Promise<string[]|null>
+async function readDir(directory, options): Promise<string[] | null>
 ```
 
 Asynchronously gets files/directories inside the given directory.
@@ -156,4 +156,85 @@ Sets **showEntries** which controls whether to list files-only, directories-only
 
 - **`All`**,
 - **`FilesOnly`**,
-- **`DirectoriesOnly`**
+- **`DirectoriesOnly`**.
+
+<br>
+
+```js
+function setMaxDepth(value): self
+```
+
+Sets **maxDepth** which controls how many child directories' entries are being listed.
+
+<br>
+
+**Params**
+
+**_value_**: `Number` - the new `maxDepth` value.
+
+<br>
+
+You can use the 2 predefined values or use an arbitrary value. The predefined values are as follows:
+
+- **`AllDirs`** = -1 (**default**) - return all subdirectories entries,
+- **`RootDir`** = 0 - return only root directory's entries.
+
+To use arbitrary values the provided `value` parameter must comply with the expression
+
+<p align="center">
+<code>
+maxDepth >= RootDir</code>
+</p>
+
+meaning
+
+<p align="center">
+<code>
+maxDepth >= 0</code>
+</p>
+
+<br>
+
+The value of `0` means that only directory entries found in the directory specified when calling either `readDir()` or `readDirSync()` methods are returned. By increasing the number we can set the depth/level of subdirectories that the method should return, e.g.
+
+<br>
+
+`maxDepth = RootDir`
+
+```js
+setMaxDepth(RootDir)
+// return only the files/directories in the current directory
+```
+
+<br>
+
+`maxDepth = 3`
+
+```js
+setMaxDepth(3)
+// return the files/directories in the current director files/directories 3-levels deep
+```
+
+<br>
+
+`maxDepth = AllDirs`
+
+```js
+setMaxDepth(AllDirs)
+// return all child files/directories in the current directory
+```
+
+<br>
+<br>
+
+```js
+function setFilter(value): self
+```
+
+Sets **filter** predicate function used for filtering directory entries (directories/files).
+
+<br>
+
+**Params**
+
+_value_: `FilterCallback` - the filter function to use when filtering directory entries.
