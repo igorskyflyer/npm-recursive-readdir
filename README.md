@@ -59,12 +59,12 @@
 
 ### API
 
-- [function-based](#λ-function-based),
-- [class-based](#-class-based)
+- [Function-based](#λ-function-based),
+- [Class-based](#-class-based)
 
 <br>
 
-#### λ function-based
+#### λ Function-based
 
 <br>
 
@@ -85,7 +85,7 @@ _**options**_: `RecursiveDirOptions` - additional options.
 <br>
 
 ```js
- function readDirSync(directory, options): string[]|null
+ function readDirSync(directory, options): string[] | null
 ```
 
 Synchronously gets files/directories inside the given directory.
@@ -100,4 +100,60 @@ _**options**_: `RecursiveDirOptions` - additional options.
 
 <br>
 
-#### 💎 class-based
+#### 💎 Class-based
+
+For own convenience and code-reuse you can use the class-based approach.
+
+Define the options once and (re)call the `readDirSync()`/`readDir()` when needed.
+
+<br>
+
+```js
+class RecursiveDir
+```
+
+<br>
+<br>
+
+**Available methods**
+
+```js
+function readDirSync(directory): string[] | null
+```
+
+Synchronously gets files/directories inside the given directory.
+
+<br>
+
+**Params**
+
+_**directory**_: `String` - the directory whose files/directories should be listed.
+
+<br>
+
+```js
+function readDir(directory): Promise<string[] | null>
+```
+
+Asynchronously gets files/directories inside the given directory.
+
+<br>
+
+**Params**
+
+_**directory**_: the directory whose files/directories should be listed.
+
+<br>
+
+```js
+function setShowEntries(value): self
+```
+
+Sets **showEntries** which controls whether to list files-only, directories-only or **both** (**default**).
+
+**Params**
+**_value_**: `RecursiveDirEntries` - a value of `RecursiveDirEntries` type with three possible values,
+
+- **`All`**,
+- **`FilesOnly`**,
+- **`DirectoriesOnly`**
