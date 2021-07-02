@@ -9,8 +9,8 @@ describe('recursive-readdir tests', () => {
       chai.isEmpty(readDirSync())
     })
 
-    it('readDirSync("non-existent-folder") should return null', () => {
-      chai.isNull(readDirSync('non-existent-folder'))
+    it('readDirSync("non-existent-directory") should return null', () => {
+      chai.isNull(readDirSync('non-existent-directory'))
     })
 
     it('readDirSync("/testing", predicate<isDirectory>) should return 3', () => {
