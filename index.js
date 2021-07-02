@@ -1,8 +1,8 @@
 const { readdirSync, statSync } = require('fs')
 const { u } = require('@igor.dvlpr/upath')
 
-const AllFolders = -1
-const RootFolder = 0
+const AllDirs = -1
+const RootDir = 0
 
 /**
  * Callback for a predicate that allows filtering file-system entries.
@@ -71,13 +71,13 @@ function recursiveDirSync(directory, options, depth, files) {
   }
 
   if (depth == undefined) {
-    depth = AllFolders
+    depth = AllDirs
   }
 
   options = options || {}
 
   options.filter = options.filter || defaultPredicate
-  options.maxDepth = options.maxDepth || AllFolders
+  options.maxDepth = options.maxDepth || AllDirs
 
   files = files || []
 
@@ -98,7 +98,7 @@ function recursiveDirSync(directory, options, depth, files) {
       let isDirectory = false
       let entry = ''
 
-      if (options.maxDepth === RootFolder) {
+      if (options.maxDepth === RootDir) {
         entry = directoryEntries[i]
       } else {
         entry = fullPath
@@ -116,7 +116,7 @@ function recursiveDirSync(directory, options, depth, files) {
         continue
       }
 
-      if (options.maxDepth === AllFolders || depth < options.maxDepth) {
+      if (options.maxDepth === AllDirs || depth < options.maxDepth) {
         try {
           if (
             options.filter(entry, isDirectory, false) &&
@@ -181,7 +181,7 @@ function readDirSync(directory, options) {
 class RecursiveDir {
   constructor() {
     this.options = {
-      maxDepth: AllFolders,
+      maxDepth: AllDirs,
       filter: defaultPredicate,
       showEntries: RecursiveDirEntries.All,
     }
@@ -223,17 +223,20 @@ class RecursiveDir {
   }
 
   /**
-   * Sets **maxDepth** which controls how many child folders'
+   * Sets **maxDepth** which controls how many child directories'
    * entries are being listed.
    *
    * Provided const values are:
-   * -  AllFolders = -1 (default) - returns all subfolders,
-   * -  RootFolder = 0 - returns only root folder entries.
+   * -  AllDirs = -1 (default) - return all subdirectories entries,
+   * -  RootDir = 0 - return only root directory entries.
    * @param {number} value
    * @returns {RecursiveDir}
    */
   setMaxDepth(value) {
-    this.options.maxDepth = value
+    if (value >= RootDir) {
+      this.options.maxDepth = value
+    }
+
     return this
   }
 
@@ -252,7 +255,7 @@ class RecursiveDir {
 module.exports = {
   readDirSync,
   readDir,
-  AllFolders,
-  RootFolder,
+  AllDirs,
+  RootDir,
   RecursiveDir,
 }
