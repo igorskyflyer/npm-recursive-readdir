@@ -57,6 +57,49 @@
 
 <br>
 
+### Usage
+
+Install it by running:
+
+```shell
+npm i "@igor.dvlpr/recursive-readdir"
+```
+
+<br>
+
+#### Examples
+
+```js
+const { readDirSync } = require('@igor.dvlpr/recursive-readdir')
+
+console.log(readDirSync('non-existent-directory')) // returns []
+
+console.log(
+  readDirSync(testingPath, {
+    maxDepth: Depth.All,
+    filter: (entry) => entry.isDirectory,
+  })
+) // returns only subdirectories (all subdirectories)
+
+// the following can be used interchangeably
+console.log(
+  readDirSync(testingPath, {
+    maxDepth: Depth.All,
+    entries: Entry.DirectoriesOnly
+  })
+) // returns only subdirectories (all subdirectories)
+
+console.log(
+  readDirSync(testingPath, {
+    maxDepth: Depth.All,
+		entries: Entry.FilesOnly
+    filter: (entry) => entry.path.indexOf('.js') > -1,
+  })
+) // returns only JavaScript - .js files found in all (sub)directories
+```
+
+<br>
+
 ### API
 
 - [Function-based](#λ-function-based),
@@ -69,7 +112,7 @@
 <br>
 
 ```js
-async function readDir(directory, options): Promise<string[] | null>
+async function readDir(directory, options): Promise<string[]>
 ```
 
 Asynchronously gets files/directories inside the given directory.
@@ -85,7 +128,7 @@ _**options**_: `RecursiveDirOptions` - additional options.
 <br>
 
 ```js
- function readDirSync(directory, options): string[] | null
+ function readDirSync(directory, options): string[]
 ```
 
 Synchronously gets files/directories inside the given directory.
@@ -118,7 +161,7 @@ class RecursiveDir
 **Available methods**
 
 ```js
-function readDirSync(directory): string[] | null
+function readDirSync(directory): string[]
 ```
 
 Synchronously gets files/directories inside the given directory.
@@ -132,7 +175,7 @@ _**directory**_: `String` - the directory whose files/directories should be list
 <br>
 
 ```js
-function readDir(directory): Promise<string[] | null>
+function readDir(directory): Promise<string[]>
 ```
 
 Asynchronously gets files/directories inside the given directory.
@@ -146,22 +189,22 @@ _**directory**_: the directory whose files/directories should be listed.
 <br>
 
 ```js
-function setShowEntries(value): self
+function entries(value): RecursiveDir
 ```
 
-Sets **showEntries** which controls whether to list files-only, directories-only or **both** (**default**).
+Sets the **entries** property which controls whether to list files-only, directories-only or **both** (**default**).
 
 **Params**
-**_value_**: `RecursiveDirEntries` - a value of `RecursiveDirEntries` type with three possible values,
+**_value_**: `Entry` - a value with three possible values - provided as class consts,
 
-- **`All`**,
-- **`FilesOnly`**,
-- **`DirectoriesOnly`**.
+- **`Entry.All`**,
+- **`Entry.FilesOnly`**,
+- **`Entry.DirectoriesOnly`**.
 
 <br>
 
 ```js
-function setMaxDepth(value): self
+function maxDepth(value): RecursiveDir
 ```
 
 Sets **maxDepth** which controls how many child directories' entries are being listed.
@@ -170,23 +213,28 @@ Sets **maxDepth** which controls how many child directories' entries are being l
 
 **Params**
 
-**_value_**: `Number` - the new `maxDepth` value.
+**_value_**: `Depth` - the new `maxDepth` value.
 
 <br>
 
 You can use the 2 predefined values or use an arbitrary value. The predefined values are as follows:
 
-- **`AllDirs`** = -1 (**default**) - return all subdirectories entries,
-- **`RootDir`** = 0 - return only root directory's entries.
+- **`Depth.All`** = -1 - return all subdirectories entries,
+- **`Depth.Root`** = 0 (**default**) - return only root directory's entries.
+
+> 🤔 Why the default value of `maxDepth` is **_NOT_** `Depth.All` when this module provides recursive and subdirectory file traversal?
+> <br>
+
+> ⚡ Simple, because you need to explicitly set it to that value because traversal through all child subdirectories is very resource/time consuming, just imagine setting the `directory` parameter to the root of your drive and in conjunction with `maxDepth = Depth.All`. 😲
 
 To use arbitrary values the provided `value` parameter must comply with the expression
 
 <p align="center">
 <code>
-maxDepth >= RootDir</code>
+maxDepth >= Depth.Root</code>
 </p>
 
-meaning
+i.e.,
 
 <p align="center">
 <code>
@@ -199,10 +247,10 @@ The value of `0` means that only directory entries found in the directory specif
 
 <br>
 
-`maxDepth = RootDir`
+`maxDepth = Depth.Root`
 
 ```js
-setMaxDepth(RootDir)
+maxDepth(Depth.Root)
 // return only the files/directories in the current directory
 ```
 
@@ -211,16 +259,16 @@ setMaxDepth(RootDir)
 `maxDepth = 3`
 
 ```js
-setMaxDepth(3)
+maxDepth(3)
 // return the files/directories in the current director files/directories 3-levels deep
 ```
 
 <br>
 
-`maxDepth = AllDirs`
+`maxDepth = Depth.All`
 
 ```js
-setMaxDepth(AllDirs)
+maxDepth(Depth.All)
 // return all child files/directories in the current directory
 ```
 
@@ -228,7 +276,7 @@ setMaxDepth(AllDirs)
 <br>
 
 ```js
-function setFilter(value): self
+function filter(value): RecursiveDir
 ```
 
 Sets **filter** predicate function used for filtering directory entries (directories/files).
@@ -238,3 +286,5 @@ Sets **filter** predicate function used for filtering directory entries (directo
 **Params**
 
 _value_: `FilterCallback` - the filter function to use when filtering directory entries.
+
+<br>
