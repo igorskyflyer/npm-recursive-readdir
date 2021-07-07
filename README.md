@@ -67,40 +67,6 @@ npm i "@igor.dvlpr/recursive-readdir"
 
 <br>
 
-#### Examples
-
-```js
-const { readDirSync, Depth, Entry } = require('@igor.dvlpr/recursive-readdir')
-const testingPath = './somePath'
-
-console.log(readDirSync('non-existent-directory')) // returns []
-
-console.log(
-  readDirSync(testingPath, {
-    maxDepth: Depth.All,
-    filter: (entry) => entry.isDirectory,
-  })
-) // returns only subdirectories (all subdirectories)
-
-// the following can be used interchangeably
-console.log(
-  readDirSync(testingPath, {
-    maxDepth: Depth.All,
-    entries: Entry.DirectoriesOnly,
-  })
-) // returns only subdirectories (all subdirectories)
-
-console.log(
-  readDirSync(testingPath, {
-    maxDepth: Depth.All,
-    entries: Entry.FilesOnly,
-    filter: (entry) => entry.path.indexOf('.js') > -1,
-  })
-) // returns only JavaScript - .js files found in all (sub)directories
-```
-
-<br>
-
 ### API
 
 - [Function-based](#λ-function-based),
@@ -287,5 +253,39 @@ Sets **filter** predicate function used for filtering directory entries (directo
 **Params**
 
 _value_: `FilterCallback` - the filter function to use when filtering directory entries.
+
+<br>
+
+#### Examples
+
+```js
+const { readDirSync, Depth, Entry } = require('@igor.dvlpr/recursive-readdir')
+const testingPath = './somePath'
+
+console.log(readDirSync('non-existent-directory')) // returns []
+
+console.log(
+  readDirSync(testingPath, {
+    maxDepth: Depth.All,
+    filter: (entry) => entry.isDirectory,
+  })
+) // returns only subdirectories (all subdirectories)
+
+// the following can be used interchangeably
+console.log(
+  readDirSync(testingPath, {
+    maxDepth: Depth.All,
+    entries: Entry.DirectoriesOnly,
+  })
+) // returns only subdirectories (all subdirectories)
+
+console.log(
+  readDirSync(testingPath, {
+    maxDepth: Depth.All,
+    entries: Entry.FilesOnly,
+    filter: (entry) => entry.path.indexOf('.js') > -1,
+  })
+) // returns only JavaScript - .js files found in all (sub)directories
+```
 
 <br>
