@@ -70,7 +70,7 @@ npm i "@igor.dvlpr/recursive-readdir"
 #### Examples
 
 ```js
-const { readDirSync } = require('@igor.dvlpr/recursive-readdir')
+const { readDirSync, Depth, Entry } = require('@igor.dvlpr/recursive-readdir')
 const testingPath = './somePath'
 
 console.log(readDirSync('non-existent-directory')) // returns []
