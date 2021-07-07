@@ -197,7 +197,7 @@ function recursiveDirSync(directory, options, depth, files) {
 /**
  * Asynchronously gets files/directories inside the given directory.
  * @param {string} directory the directory whose files/directories should be listed
- * @param {RecursiveDirOptions} options additional options
+ * @param {RecursiveDirOptions} [options] additional options
  * @returns {Promise<string[]>} returns Promise\<string[]\>
  */
 async function readDir(directory, options) {
@@ -213,7 +213,7 @@ async function readDir(directory, options) {
 /**
  * Synchronously gets files/directories inside the given directory.
  * @param {string} directory the directory whose files/directories should be listed
- * @param {RecursiveDirOptions} options additional options
+ * @param {RecursiveDirOptions} [options] additional options
  * @returns {string[]} returns string[]
  */
 function readDirSync(directory, options) {
