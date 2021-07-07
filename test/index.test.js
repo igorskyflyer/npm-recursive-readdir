@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 const chai = require('chai').assert
 const { readDirSync, Depth } = require('../index')
 const testingPath = './test/testing'
