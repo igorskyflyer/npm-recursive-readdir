@@ -5,7 +5,7 @@ const { u } = require('@igor.dvlpr/upath')
  * @readonly
  * @enum {number}
  */
-const Dir = {
+const Depth = {
   /** All subdirectories */
   All: -1,
   /** Only the root directory */
@@ -48,10 +48,10 @@ const Entry = {
  * - `Entry.FilesOnly`,
  * - `Entry.DirectoriesOnly`,
  * - `Entry.All` (**default**),
- * @property {Dir} [maxDepth=Dir.Root] The level of child directories to read, possible values:
+ * @property {Depth} [maxDepth=Depth.Root] The level of child directories to read, possible values:
  *
- * - `Dir.All`
- * - `Dir.Root` (**default**)
+ * - `Depth.All`
+ * - `Depth.Root` (**default**)
  * - any arbitrary value that conforms the condition `maxDepth >= 0`.
  */
 
@@ -107,15 +107,15 @@ function recursiveDirSync(directory, options, depth, files) {
   }
 
   if (depth == undefined) {
-    depth = Dir.Root
+    depth = Depth.Root
   }
 
   options = options || {}
 
   options.filter = options.filter || defaultPredicate
 
-  if (typeof options.maxDepth !== 'number' || options.maxDepth < Dir.All) {
-    options.maxDepth = Dir.Root
+  if (typeof options.maxDepth !== 'number' || options.maxDepth < Depth.All) {
+    options.maxDepth = Depth.Root
   }
 
   files = files || []
@@ -137,7 +137,7 @@ function recursiveDirSync(directory, options, depth, files) {
       let isDirectory = false
       let path = ''
 
-      if (options.maxDepth === Dir.Root) {
+      if (options.maxDepth === Depth.Root) {
         path = directoryEntries[i]
       } else {
         path = fullPath
@@ -157,7 +157,7 @@ function recursiveDirSync(directory, options, depth, files) {
         continue
       }
 
-      if (options.maxDepth === Dir.All || depth < options.maxDepth) {
+      if (options.maxDepth === Depth.All || depth < options.maxDepth) {
         try {
           if (
             options.filter(
@@ -226,7 +226,7 @@ function readDirSync(directory, options) {
 class RecursiveDir {
   constructor() {
     this.options = {
-      maxDepth: Dir.Root,
+      maxDepth: Depth.Root,
       filter: defaultPredicate,
       entries: Entry.All,
     }
@@ -276,14 +276,14 @@ class RecursiveDir {
    *
    * Possible values:
    *
-   * - `Dir.All`
-   * - `Dir.Root` (**default**)
+   * - `Depth.All`
+   * - `Depth.Root` (**default**)
    * - any arbitrary value that conforms the condition `maxDepth >= 0`.
-   * @param {Dir} value
+   * @param {Depth} value
    * @returns {RecursiveDir}
    */
   maxDepth(value) {
-    if (value >= Dir.Root) {
+    if (value >= Depth.Root) {
       this.options.maxDepth = value
     }
 
@@ -305,7 +305,7 @@ class RecursiveDir {
 module.exports = {
   readDirSync,
   readDir,
-  Dir,
+  Depth,
   Entry,
   RecursiveDir,
 }
