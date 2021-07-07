@@ -259,7 +259,12 @@ _value_: `FilterCallback` - the filter function to use when filtering directory 
 #### Examples
 
 ```js
-const { readDirSync, Depth, Entry } = require('@igor.dvlpr/recursive-readdir')
+const {
+  readDirSync,
+  Depth,
+  Entry,
+  RecursiveDir,
+} = require('@igor.dvlpr/recursive-readdir')
 const testingPath = './somePath'
 
 // Function-based approach
