@@ -10,7 +10,6 @@ describe('recursive-readdir tests', () => {
     })
 
     it('readDirSync("non-existent-directory") should return []', () => {
-      // @ts-ignore
       chai.isEmpty(readDirSync('non-existent-directory'))
     })
 
