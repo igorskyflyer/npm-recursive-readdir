@@ -283,7 +283,7 @@ class RecursiveDir {
    * @returns {RecursiveDir}
    */
   maxDepth(value) {
-    if (value >= Depth.Root) {
+    if (value >= Depth.All) {
       this.options.maxDepth = value
     }
 
