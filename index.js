@@ -1,33 +1,58 @@
 const { readdirSync, statSync } = require('fs')
 const { u } = require('@igor.dvlpr/upath')
 
-const AllDirs = -1
-const RootDir = 0
+/** Used for maxDepth parameter
+ * @readonly
+ * @enum {number}
+ */
+const Dir = {
+  /** All subdirectories */
+  All: -1,
+  /** Only the root directory */
+  Root: 0,
+}
+
+/** Used for entries filtering parameter
+ * @readonly
+ * @enum {number}
+ */
+const Entry = {
+  /** All directory entries - files and subdirectories */
+  All: 0xaaa,
+  /** Only files */
+  FilesOnly: 0xbbb,
+  /** Only subdirectories */
+  DirectoriesOnly: 0xccc,
+}
+
+/**
+ * @typedef {Object} RecursiveFilterParams
+ * @property {string} path Path of directory entry.
+ * @property {boolean} isDirectory Indicates whether the entry is a directory.
+ * @property {boolean} wasSkipped Indicates if the entry was skipped during traversal, most frequently caused by lack of permissions.
+ */
 
 /**
  * Callback for a predicate that allows filtering file-system entries.
  * @callback FilterCallback
- * @param {string} path
- * @param {boolean} isDirectory
- * @param {boolean} wasSkipped
+ * @param {RecursiveFilterParams} entry A `RecursiveFilterParams` object that contains information about the given entry.
  * @returns {boolean}
  */
-
-/** RecursiveDirEntries type used for showEntries property.
- * @enum {number}
- */
-const RecursiveDirEntries = {
-  All: -1,
-  FilesOnly: 0,
-  DirectoriesOnly: 1,
-}
 
 /**
  * Callback for a predicate that allows filtering file-system entries.
  * @typedef {Object} RecursiveDirOptions
- * @property {FilterCallback} [filter]
- * @property {RecursiveDirEntries} [showEntries=RecursiveDirEntries.All]
- * @property {number} [maxDepth=All]
+ * @property {FilterCallback} [filter] A function used for filtering when tranversing the provided directory.
+ * @property {Entry} [entries=Entry.All] Indicates which entries to show, files-only, directories-only or all (**default**), use any of the following values,
+ *
+ * - `Entry.FilesOnly`,
+ * - `Entry.DirectoriesOnly`,
+ * - `Entry.All` (**default**),
+ * @property {Dir} [maxDepth=Dir.Root] The level of child directories to read, possible values:
+ *
+ * - `Dir.All`
+ * - `Dir.Root` (**default**)
+ * - any arbitrary value that conforms the condition `maxDepth >= 0`.
  */
 
 /**
@@ -41,19 +66,30 @@ function defaultPredicate() {
 }
 
 /**
- * Returns whether should we add the directory entry or not.
+ * Returns whether we should add the directory entry or not.
  * @private
  * @param {boolean} isDirectory
- * @param {RecursiveDirEntries} entries
+ * @param {number} entries
  */
 function shouldPush(isDirectory, entries) {
-  if (isDirectory && entries !== RecursiveDirEntries.FilesOnly) {
+  if (isDirectory && entries !== Entry.FilesOnly) {
     return true
-  } else if (!isDirectory && entries !== RecursiveDirEntries.DirectoriesOnly) {
+  } else if (!isDirectory && entries !== Entry.DirectoriesOnly) {
     return true
   }
 
   return false
+}
+
+/**
+ * Creates a RecursiveFilterParams object.
+ * @private
+ * @param {String} path
+ * @param {boolean} isDirectory
+ * @param {boolean} wasSkipped
+ */
+function createRecursiveFilterParams(path, isDirectory, wasSkipped) {
+  return { path, isDirectory, wasSkipped }
 }
 
 /**
@@ -63,7 +99,7 @@ function shouldPush(isDirectory, entries) {
  * @param {RecursiveDirOptions} options
  * @param {number} depth
  * @param {string[]} files
- * @returns {string[] | null}
+ * @returns {string[]}
  */
 function recursiveDirSync(directory, options, depth, files) {
   if (!directory) {
@@ -71,13 +107,16 @@ function recursiveDirSync(directory, options, depth, files) {
   }
 
   if (depth == undefined) {
-    depth = AllDirs
+    depth = Dir.Root
   }
 
   options = options || {}
 
   options.filter = options.filter || defaultPredicate
-  options.maxDepth = options.maxDepth || AllDirs
+
+  if (typeof options.maxDepth !== 'number' || options.maxDepth < Dir.All) {
+    options.maxDepth = Dir.Root
+  }
 
   files = files || []
 
@@ -96,54 +135,60 @@ function recursiveDirSync(directory, options, depth, files) {
     for (let i = 0; i < directoryEntriesCount; i++) {
       const fullPath = u(`${directory}/${directoryEntries[i]}`)
       let isDirectory = false
-      let entry = ''
+      let path = ''
 
-      if (options.maxDepth === RootDir) {
-        entry = directoryEntries[i]
+      if (options.maxDepth === Dir.Root) {
+        path = directoryEntries[i]
       } else {
-        entry = fullPath
+        path = fullPath
       }
 
       try {
         isDirectory = statSync(fullPath).isDirectory()
       } catch {
         if (
-          options.filter(entry, isDirectory, true) &&
-          shouldPush(isDirectory, options.showEntries)
+          options.filter(
+            createRecursiveFilterParams(path, isDirectory, true)
+          ) &&
+          shouldPush(isDirectory, options.entries)
         ) {
-          files.push(entry)
+          files.push(path)
         }
         continue
       }
 
-      if (options.maxDepth === AllDirs || depth < options.maxDepth) {
+      if (options.maxDepth === Dir.All || depth < options.maxDepth) {
         try {
           if (
-            options.filter(entry, isDirectory, false) &&
-            shouldPush(isDirectory, options.showEntries)
+            options.filter(
+              createRecursiveFilterParams(path, isDirectory, false)
+            ) &&
+            shouldPush(isDirectory, options.entries)
           ) {
-            files.push(entry)
+            files.push(path)
           }
 
           if (isDirectory) {
             files = recursiveDirSync(fullPath, options, depth, files)
           }
         } catch {
-          if (shouldPush(isDirectory, options.showEntries)) {
-            options.filter(entry, isDirectory, true)
+          if (shouldPush(isDirectory, options.entries)) {
+            options.filter(createRecursiveFilterParams(path, isDirectory, true))
           }
         }
       } else {
         if (
-          options.filter(entry, isDirectory, false) &&
-          shouldPush(isDirectory, options.showEntries)
+          options.filter(
+            createRecursiveFilterParams(path, isDirectory, false)
+          ) &&
+          shouldPush(isDirectory, options.entries)
         ) {
-          files.push(entry)
+          files.push(path)
         }
       }
     }
   } catch {
-    return null
+    return []
   }
 
   return files
@@ -153,7 +198,7 @@ function recursiveDirSync(directory, options, depth, files) {
  * Asynchronously gets files/directories inside the given directory.
  * @param {string} directory the directory whose files/directories should be listed
  * @param {RecursiveDirOptions} options additional options
- * @returns {Promise<string[]|null>} returns Promise\<string[]\> or Promise\<null\>
+ * @returns {Promise<string[]>} returns Promise\<string[]\>
  */
 async function readDir(directory, options) {
   return new Promise((resolve, reject) => {
@@ -169,7 +214,7 @@ async function readDir(directory, options) {
  * Synchronously gets files/directories inside the given directory.
  * @param {string} directory the directory whose files/directories should be listed
  * @param {RecursiveDirOptions} options additional options
- * @returns {string[] | null} returns string[] or null if a fatal error has occurred
+ * @returns {string[]} returns string[]
  */
 function readDirSync(directory, options) {
   return recursiveDirSync(directory, options)
@@ -181,16 +226,16 @@ function readDirSync(directory, options) {
 class RecursiveDir {
   constructor() {
     this.options = {
-      maxDepth: AllDirs,
+      maxDepth: Dir.Root,
       filter: defaultPredicate,
-      showEntries: RecursiveDirEntries.All,
+      entries: Entry.All,
     }
   }
 
   /**
    * Synchronously gets files/directories inside the given directory.
    * @param {string} directory the directory whose files/directories should be listed
-   * @returns {string[] | null} returns string[] or null if a fatal error has occurred
+   * @returns {string[]} returns string[]
    */
   readDirSync(directory) {
     return recursiveDirSync(directory, this.options)
@@ -199,7 +244,7 @@ class RecursiveDir {
   /**
    * Asynchronously gets files/directories inside the given directory.
    * @param {string} directory the directory whose files/directories should be listed
-   * @returns {Promise<string[]|null>} returns Promise\<string[]\> or Promise\<null\>
+   * @returns {Promise<string[]>} returns Promise\<string[]\>
    */
   async readDir(directory) {
     return new Promise((resolve, reject) => {
@@ -212,13 +257,16 @@ class RecursiveDir {
   }
 
   /**
-   * Sets **showEntries** which controls whether to list files-only,
-   * directories-only or both (default).
-   * @param {RecursiveDirEntries} value
+   * Sets the **entries** property which controls which entries to show, files-only, directories-only or all (**default**), use any of the following values,
+   *
+   * - `Entry.FilesOnly`,
+   * - `Entry.DirectoriesOnly`,
+   * - `Entry.All` (**default**),
+   * @param {Entry} value
    * @returns {RecursiveDir}
    */
-  setShowEntries(value) {
-    this.options.showEntries = value
+  entries(value) {
+    this.options.entries = value
     return this
   }
 
@@ -226,14 +274,16 @@ class RecursiveDir {
    * Sets **maxDepth** which controls how many child directories'
    * entries are being listed.
    *
-   * Provided const values are:
-   * -  AllDirs = -1 (default) - return all subdirectories entries,
-   * -  RootDir = 0 - return only root directory entries.
-   * @param {number} value
+   * Possible values:
+   *
+   * - `Dir.All`
+   * - `Dir.Root` (**default**)
+   * - any arbitrary value that conforms the condition `maxDepth >= 0`.
+   * @param {Dir} value
    * @returns {RecursiveDir}
    */
-  setMaxDepth(value) {
-    if (value >= RootDir) {
+  maxDepth(value) {
+    if (value >= Dir.Root) {
       this.options.maxDepth = value
     }
 
@@ -241,12 +291,12 @@ class RecursiveDir {
   }
 
   /**
-   * Sets **filter** predicate used for filtering
+   * Sets **filter** predicate function used for filtering
    * directory entries (directories/files)
    * @param {FilterCallback} value
    * @returns {RecursiveDir}
    */
-  setFilter(value) {
+  filter(value) {
     this.options.filter = value
     return this
   }
@@ -255,7 +305,7 @@ class RecursiveDir {
 module.exports = {
   readDirSync,
   readDir,
-  AllDirs,
-  RootDir,
+  Dir,
+  Entry,
   RecursiveDir,
 }
