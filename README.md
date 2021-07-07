@@ -3,7 +3,7 @@
 <br>
 
 <p align="center">
-	<img src="https://github.com/igorskyflyer/npm-recursive-readdir/raw/main/assets/recursive-readdir.png" alt="Recursive-Readdir logo" width="180" height="180">
+	<img src="https://raw.githubusercontent.com/igorskyflyer/npm-recursive-readdir/main/assets/recursive-readdir.png" alt="Recursive-Readdir logo" width="180" height="180">
 </p>
 
 <br>
