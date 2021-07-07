@@ -71,6 +71,7 @@ npm i "@igor.dvlpr/recursive-readdir"
 
 ```js
 const { readDirSync } = require('@igor.dvlpr/recursive-readdir')
+const testingPath = './somePath'
 
 console.log(readDirSync('non-existent-directory')) // returns []
 
@@ -85,14 +86,14 @@ console.log(
 console.log(
   readDirSync(testingPath, {
     maxDepth: Depth.All,
-    entries: Entry.DirectoriesOnly
+    entries: Entry.DirectoriesOnly,
   })
 ) // returns only subdirectories (all subdirectories)
 
 console.log(
   readDirSync(testingPath, {
     maxDepth: Depth.All,
-		entries: Entry.FilesOnly
+    entries: Entry.FilesOnly,
     filter: (entry) => entry.path.indexOf('.js') > -1,
   })
 ) // returns only JavaScript - .js files found in all (sub)directories
