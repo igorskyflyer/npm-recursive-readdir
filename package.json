@@ -7,7 +7,7 @@
 	"scripts": {
 		"test": "mocha --slow 0",
 		"dts": "tsc",
-		"party": "npm test && dts && npm publish --access public"
+		"party": "npm test && npm run dts && npm publish --access public"
 	},
 	"repository": {
 		"type": "git",
