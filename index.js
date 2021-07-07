@@ -42,7 +42,7 @@ const Entry = {
 /**
  * Callback for a predicate that allows filtering file-system entries.
  * @typedef {Object} RecursiveDirOptions
- * @property {FilterCallback} [filter] A function used for filtering when tranversing the provided directory.
+ * @property {FilterCallback} [filter] A function used for filtering when traversing the provided directory.
  * @property {Entry} [entries=Entry.All] Indicates which entries to show, files-only, directories-only or all (**default**), use any of the following values,
  *
  * - `Entry.FilesOnly`,
