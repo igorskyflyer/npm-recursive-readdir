@@ -262,6 +262,8 @@ _value_: `FilterCallback` - the filter function to use when filtering directory 
 const { readDirSync, Depth, Entry } = require('@igor.dvlpr/recursive-readdir')
 const testingPath = './somePath'
 
+// Function-based approach
+
 console.log(readDirSync('non-existent-directory')) // returns []
 
 console.log(
@@ -286,6 +288,17 @@ console.log(
     filter: (entry) => entry.path.indexOf('.js') > -1,
   })
 ) // returns only JavaScript - .js files found in all (sub)directories
+
+// Class-based approach
+
+const dir = new RecursiveDir()
+
+dir
+  .maxDepth(Depth.All)
+  .entries(Entry.FilesOnly)
+  .filter((entry) => entry.path.indexOf('.md') > -1)
+
+console.log(dir.readDirSync(testingPath)) // returns only .md (Markdown) files found in all (sub)directories
 ```
 
 <br>
