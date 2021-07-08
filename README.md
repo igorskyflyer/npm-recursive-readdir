@@ -12,6 +12,11 @@
   <img src="https://github.com/igorskyflyer/npm-recursive-readdir/workflows/tests/badge.svg">
 </p>
 
+<p align="center">
+	<a href="https://open.vscode.dev/igorskyflyer/npm-recursive-readdir"><img src="https://open.vscode.dev/badges/open-in-vscode.svg" alt="Open in VS Code"></a>
+</p>
+
+<br>
 <br>
 
 📖 Provides advanced recursive readdir() and readdirSync() functions with high-level of Node-compatibility and much more. 📁
