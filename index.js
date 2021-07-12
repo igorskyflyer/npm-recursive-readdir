@@ -52,7 +52,8 @@ const Entry = {
  *
  * - `Depth.All`
  * - `Depth.Root` (**default**)
- * - any arbitrary value that conforms the condition `maxDepth >= 0`.
+ * - any arbitrary value that conforms the condition `maxDepth >= 0`,
+ * @property {boolean} [addTrailingSlash=false] Indicates whether a trailing slash should be added to directory paths.
  */
 
 /**
@@ -145,6 +146,10 @@ function recursiveDirSync(directory, options, depth, files) {
 
       try {
         isDirectory = statSync(fullPath).isDirectory()
+
+        if (options.addTrailingSlash && isDirectory) {
+          path = u(path, true)
+        }
       } catch {
         if (
           options.filter(
@@ -222,13 +227,18 @@ function readDirSync(directory, options) {
 
 /**
  * RecursiveDir class
+ * @class
  */
 class RecursiveDir {
   constructor() {
+    /**
+     * @type {RecursiveDirOptions}
+     */
     this.options = {
       maxDepth: Depth.Root,
       filter: defaultPredicate,
       entries: Entry.All,
+      addTrailingSlash: false,
     }
   }
 
@@ -298,6 +308,16 @@ class RecursiveDir {
    */
   filter(value) {
     this.options.filter = value
+    return this
+  }
+
+  /**
+   * Sets whether a trailing slash should be added to directory entries.
+   * @param {boolean} value
+   * @returns {RecursiveDir}
+   */
+  addTrailingSlash(value) {
+    this.options.addTrailingSlash = value
     return this
   }
 }
