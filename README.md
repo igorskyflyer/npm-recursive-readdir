@@ -52,6 +52,8 @@
 
 ✅ multiple output formats,
 
+✅ directories optional trailing slash,
+
 ✅ custom filter function,
 
 ✅ async and sync methods available,
@@ -259,6 +261,22 @@ Sets **filter** predicate function used for filtering directory entries (directo
 
 _value_: `FilterCallback` - the filter function to use when filtering directory entries.
 
+<br>
+<br>
+
+```js
+function addTrailingSlash(value): RecursiveDir
+```
+
+Sets whether a trailing slash should be added to directory entries.
+
+ <br>
+
+**Params**
+
+_value_: `boolean` - a Boolean indicating whether a trailing slash should be added to directory entries.
+
+<br>
 <br>
 
 #### Examples
