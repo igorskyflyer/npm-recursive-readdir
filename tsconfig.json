@@ -1,9 +1,11 @@
 {
 	"include": [
-		"./*.js"
+		"./*.js",
 	],
 	"compilerOptions": {
+		"target": "ES5",
 		"allowJs": true,
+		"checkJs": true,
 		"declaration": true,
 		"emitDeclarationOnly": true,
 		"outDir": "dist"
