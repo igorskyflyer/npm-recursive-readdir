@@ -1,5 +1,5 @@
 const chai = require('chai').assert
-const { readDirSync, Depth } = require('../index')
+const { readDirSync, Depth } = require('../recursive-readdir')
 const testingPath = './test/testing'
 
 describe('recursive-readdir tests', () => {
