@@ -1,7 +1,7 @@
 {
 	"name": "@igor.dvlpr/recursive-readdir",
-	"version": "1.2.0",
-	"description": "Provides recursive readdir() and readdirSync() functions. ",
+	"version": "1.2.1",
+	"description": "📖 Provides recursive readdir() and readdirSync() functions. 📁",
 	"main": "recursive-readdir.js",
 	"types": "./dist/recursive-readdir.d.ts",
 	"engines": {
