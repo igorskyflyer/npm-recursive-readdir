@@ -1,4 +1,4 @@
-const { readdirSync, statSync } = require('fs')
+const { readdirSync } = require('fs')
 const { u } = require('@igor.dvlpr/upath')
 
 /** Used for maxDepth parameter
@@ -122,7 +122,7 @@ function recursiveDirSync(directory, options, depth, files) {
   files = files || []
 
   try {
-    const directoryEntries = readdirSync(directory)
+    const directoryEntries = readdirSync(directory, { withFileTypes: true })
     const directoryEntriesCount = directoryEntries.length
 
     if (directoryEntriesCount > 0) {
@@ -134,29 +134,25 @@ function recursiveDirSync(directory, options, depth, files) {
     }
 
     for (let i = 0; i < directoryEntriesCount; i++) {
-      const fullPath = u(`${directory}/${directoryEntries[i]}`)
+      const entry = directoryEntries[i]
+      const fullPath = u(`${directory}/${entry.name}`)
       let isDirectory = false
       let path = ''
 
       if (options.maxDepth === Depth.Root) {
-        path = directoryEntries[i]
+        path = entry.name
       } else {
         path = fullPath
       }
 
       try {
-        isDirectory = statSync(fullPath).isDirectory()
+        isDirectory = entry.isDirectory()
 
         if (options.addTrailingSlash && isDirectory) {
           path = u(path, true)
         }
       } catch {
-        if (
-          options.filter(
-            createRecursiveFilterParams(path, isDirectory, true)
-          ) &&
-          shouldPush(isDirectory, options.entries)
-        ) {
+        if (options.filter(createRecursiveFilterParams(path, isDirectory, true)) && shouldPush(isDirectory, options.entries)) {
           files.push(path)
         }
         continue
@@ -164,12 +160,7 @@ function recursiveDirSync(directory, options, depth, files) {
 
       if (options.maxDepth === Depth.All || depth < options.maxDepth) {
         try {
-          if (
-            options.filter(
-              createRecursiveFilterParams(path, isDirectory, false)
-            ) &&
-            shouldPush(isDirectory, options.entries)
-          ) {
+          if (options.filter(createRecursiveFilterParams(path, isDirectory, false)) && shouldPush(isDirectory, options.entries)) {
             files.push(path)
           }
 
@@ -182,12 +173,7 @@ function recursiveDirSync(directory, options, depth, files) {
           }
         }
       } else {
-        if (
-          options.filter(
-            createRecursiveFilterParams(path, isDirectory, false)
-          ) &&
-          shouldPush(isDirectory, options.entries)
-        ) {
+        if (options.filter(createRecursiveFilterParams(path, isDirectory, false)) && shouldPush(isDirectory, options.entries)) {
           files.push(path)
         }
       }
