@@ -98,8 +98,8 @@ function createRecursiveFilterParams(path, isDirectory, wasSkipped) {
  * @private
  * @param {string} directory
  * @param {RecursiveDirOptions} options
- * @param {number} depth
- * @param {string[]} files
+ * @param {number} [depth]
+ * @param {string[]} [files]
  * @returns {string[]}
  */
 function recursiveDirSync(directory, options, depth, files) {
