@@ -29,6 +29,11 @@
 > I've built this npm module because I needed a reliable and efficient npm module for listing directories while building another one of my projects, a Visual Studio Code extension called **[New Folder](https://github.com/igorskyflyer/vscode-new-folder)** and I needed to create a custom QuickPick dialog allowing the user to pick a root directory.
 
 <br>
+<br>
+
+✨ Since `v.2.0.0` `recursive-readdir` is a hybrid module that supports both CommonJS (legacy) and ES modules, thanks to [Modern Module](https://github.com/igorskyflyer/npm-modern-module).
+
+<br>
 
 ### Features
 
@@ -282,12 +287,7 @@ _value_: `boolean` - a Boolean indicating whether a trailing slash should be add
 #### Examples
 
 ```js
-const {
-  readDirSync,
-  Depth,
-  Entry,
-  RecursiveDir,
-} = require('@igor.dvlpr/recursive-readdir')
+const { readDirSync, Depth, Entry, RecursiveDir } = require('@igor.dvlpr/recursive-readdir')
 const testingPath = './somePath'
 
 // Function-based approach
