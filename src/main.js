@@ -1,11 +1,11 @@
-const { readdirSync } = require('fs')
-const { u } = require('@igor.dvlpr/upath')
+import { readdirSync } from 'fs'
+import { u } from '@igor.dvlpr/upath'
 
 /** Used for maxDepth parameter
  * @readonly
  * @enum {number}
  */
-const Depth = {
+export const Depth = {
   /** All subdirectories */
   All: -1,
   /** Only the root directory */
@@ -16,7 +16,7 @@ const Depth = {
  * @readonly
  * @enum {number}
  */
-const Entry = {
+export const Entry = {
   /** All directory entries - files and subdirectories */
   All: 0xaaa,
   /** Only files */
@@ -152,6 +152,7 @@ function recursiveDirSync(directory, options, depth, files) {
           path = u(path, true)
         }
       } catch {
+        // @ts-ignore
         if (options.filter(createRecursiveFilterParams(path, isDirectory, true)) && shouldPush(isDirectory, options.entries)) {
           files.push(path)
         }
@@ -160,6 +161,7 @@ function recursiveDirSync(directory, options, depth, files) {
 
       if (options.maxDepth === Depth.All || depth < options.maxDepth) {
         try {
+          // @ts-ignore
           if (options.filter(createRecursiveFilterParams(path, isDirectory, false)) && shouldPush(isDirectory, options.entries)) {
             files.push(path)
           }
@@ -168,11 +170,13 @@ function recursiveDirSync(directory, options, depth, files) {
             files = recursiveDirSync(fullPath, options, depth, files)
           }
         } catch {
+          // @ts-ignore
           if (shouldPush(isDirectory, options.entries)) {
             options.filter(createRecursiveFilterParams(path, isDirectory, true))
           }
         }
       } else {
+        // @ts-ignore
         if (options.filter(createRecursiveFilterParams(path, isDirectory, false)) && shouldPush(isDirectory, options.entries)) {
           files.push(path)
         }
@@ -191,9 +195,10 @@ function recursiveDirSync(directory, options, depth, files) {
  * @param {RecursiveDirOptions} [options] additional options
  * @returns {Promise<string[]>} returns Promise\<string[]\>
  */
-async function readDir(directory, options) {
+export async function readDir(directory, options) {
   return new Promise((resolve, reject) => {
     try {
+      // @ts-ignore
       resolve(recursiveDirSync(directory, options))
     } catch (e) {
       reject(e)
@@ -207,7 +212,8 @@ async function readDir(directory, options) {
  * @param {RecursiveDirOptions} [options] additional options
  * @returns {string[]} returns string[]
  */
-function readDirSync(directory, options) {
+export function readDirSync(directory, options) {
+  // @ts-ignore
   return recursiveDirSync(directory, options)
 }
 
@@ -215,7 +221,7 @@ function readDirSync(directory, options) {
  * RecursiveDir class
  * @class
  */
-class RecursiveDir {
+export class RecursiveDir {
   constructor() {
     /**
      * @type {RecursiveDirOptions}
@@ -306,12 +312,4 @@ class RecursiveDir {
     this.options.addTrailingSlash = value
     return this
   }
-}
-
-module.exports = {
-  readDirSync,
-  readDir,
-  Depth,
-  Entry,
-  RecursiveDir,
 }
