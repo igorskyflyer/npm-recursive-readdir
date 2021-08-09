@@ -1,11 +1,11 @@
-import { readdirSync } from 'fs'
-import { u } from '@igor.dvlpr/upath'
+const { readdirSync } = require('fs')
+const { u } = require('@igor.dvlpr/upath')
 
 /** Used for maxDepth parameter
  * @readonly
  * @enum {number}
  */
-export const Depth = {
+const Depth = {
   /** All subdirectories */
   All: -1,
   /** Only the root directory */
@@ -16,7 +16,7 @@ export const Depth = {
  * @readonly
  * @enum {number}
  */
-export const Entry = {
+const Entry = {
   /** All directory entries - files and subdirectories */
   All: 0xaaa,
   /** Only files */
@@ -195,7 +195,7 @@ function recursiveDirSync(directory, options, depth, files) {
  * @param {RecursiveDirOptions} [options] additional options
  * @returns {Promise<string[]>} returns Promise\<string[]\>
  */
-export async function readDir(directory, options) {
+async function readDir(directory, options) {
   return new Promise((resolve, reject) => {
     try {
       // @ts-ignore
@@ -212,7 +212,7 @@ export async function readDir(directory, options) {
  * @param {RecursiveDirOptions} [options] additional options
  * @returns {string[]} returns string[]
  */
-export function readDirSync(directory, options) {
+function readDirSync(directory, options) {
   // @ts-ignore
   return recursiveDirSync(directory, options)
 }
@@ -221,7 +221,7 @@ export function readDirSync(directory, options) {
  * RecursiveDir class
  * @class
  */
-export class RecursiveDir {
+class RecursiveDir {
   constructor() {
     /**
      * @type {RecursiveDirOptions}
@@ -312,4 +312,12 @@ export class RecursiveDir {
     this.options.addTrailingSlash = value
     return this
   }
+}
+
+module.exports = {
+  Depth,
+  Entry,
+  readDir,
+  readDirSync,
+  RecursiveDir,
 }
