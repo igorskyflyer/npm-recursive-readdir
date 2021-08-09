@@ -1,5 +1,5 @@
-import { assert as chai } from 'chai'
-import { readDirSync, Depth } from '../src/main.js'
+const chai = require('chai').assert
+const { readDirSync, Depth } = require('../src/index.js')
 const testingPath = './test/testing'
 
 describe('recursive-readdir tests', () => {
