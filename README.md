@@ -78,7 +78,7 @@ npm i "@igor.dvlpr/recursive-readdir"
 ### API
 
 - [function-based](#λ-function-based),
-- [class-based](#💎-class-based)
+- [class-based](#-class-based)
 
 <br>
 
