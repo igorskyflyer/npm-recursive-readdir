@@ -1,6 +1,6 @@
 {
 	"name": "@igor.dvlpr/recursive-readdir",
-	"version": "2.1.2",
+	"version": "2.1.3",
 	"description": "📖 Provides recursive readdir() and readdirSync() functions. 📁",
 	"engines": {
 		"node": ">=12.17"
