@@ -1,6 +1,6 @@
 {
 	"name": "@igor.dvlpr/recursive-readdir",
-	"version": "2.1.4",
+	"version": "2.1.5",
 	"description": "📖 Provides recursive readdir() and readdirSync() functions. 📁",
 	"engines": {
 		"node": ">=12.17"
@@ -35,7 +35,7 @@
 		"files",
 		"igor.dvlpr"
 	],
-	"author": "Igor Dimitrijević",
+	"author": "Igor Dimitrijević <admin@igorskyflyer.me> (https://github.com/igorskyflyer)",
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/igorskyflyer/npm-resursive-readdir/issues"
