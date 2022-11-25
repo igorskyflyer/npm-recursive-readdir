@@ -47,7 +47,7 @@
 		"@types/node": "^12.17.0",
 		"chai": "^4.3.7",
 		"mocha": "^10.1.0",
-		"typescript": "^4.7.4"
+		"typescript": "^4.9.3"
 	},
 	"dependencies": {
 		"@igor.dvlpr/upath": "^2.1.2"
