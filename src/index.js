@@ -1,5 +1,5 @@
-const { readdirSync } = require('fs')
-const { u } = require('@igor.dvlpr/upath')
+import { readdirSync } from 'node:fs'
+import { u } from '@igorskyflyer/upath'
 
 /** Used for maxDepth parameter
  * @readonly
@@ -314,7 +314,7 @@ class RecursiveDir {
   }
 }
 
-module.exports = {
+export default {
   Depth,
   Entry,
   readDir,
