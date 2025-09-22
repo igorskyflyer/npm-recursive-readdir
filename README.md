@@ -184,26 +184,14 @@ You can use the 2 predefined values or use an arbitrary value. The predefined va
 - **`Depth.All`** = -1 - return all subdirectories entries,
 - **`Depth.Root`** = 0 (**default**) - return only root directory's entries.
 
-> 🤔 Why the default value of `maxDepth` is **_NOT_** `Depth.All` when this module provides recursive and subdirectory file traversal?
-> <br>
+> ### ℹ️ NOTE
+>
+> #### Why the default value of `maxDepth` is **_NOT_** `Depth.All`?
+>
+> Simple, because you need to explicitly set it to that value because traversal through all child subdirectories is very resource/time consuming, just imagine setting the `directory` parameter to the root of your drive and in conjunction with `maxDepth = Depth.All`. 
+>
 
-> ⚡ Simple, because you need to explicitly set it to that value because traversal through all child subdirectories is very resource/time consuming, just imagine setting the `directory` parameter to the root of your drive and in conjunction with `maxDepth = Depth.All`. 😲
-
-To use arbitrary values the provided `value` parameter must comply with the expression
-
-<p align="center">
-<code>
-maxDepth >= Depth.Root</code>
-</p>
-
-i.e.,
-
-<p align="center">
-<code>
-maxDepth >= 0</code>
-</p>
-
-<br>
+To use arbitrary values the provided `value` parameter must comply with the expression `maxDepth >= Depth.Root` i.e., `maxDepth >= 0`.  
 
 The value of `0` means that only directory entries found in the directory specified when calling either `readDir()` or `readDirSync()` methods are returned. By increasing the number we can set the depth/level of subdirectories that the method should return, e.g.
 
