@@ -184,12 +184,16 @@ You can use the 2 predefined values or use an arbitrary value. The predefined va
 - **`Depth.All`** = -1 - return all subdirectories entries,
 - **`Depth.Root`** = 0 (**default**) - return only root directory's entries.
 
+<br>
+
 > ### ℹ️ NOTE
 >
 > #### Why the default value of `maxDepth` is **_NOT_** `Depth.All`?
 >
 > Simple, because you need to explicitly set it to that value because traversal through all child subdirectories is very resource/time consuming, just imagine setting the `directory` parameter to the root of your drive and in conjunction with `maxDepth = Depth.All`. 
 >
+
+<br>
 
 To use arbitrary values the provided `value` parameter must comply with the expression `maxDepth >= Depth.Root` i.e., `maxDepth >= 0`.  
 
