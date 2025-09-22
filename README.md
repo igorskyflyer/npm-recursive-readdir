@@ -16,18 +16,18 @@
 
 ## 📃 Table of Contents
 
-- [Features](#-features)
-- [Motivation](#-features)
-- [Usage](#-usage)
-- [API](#-api)
-  - [Function-based](#λ-function-based)
-  - [Class-based](#-class-based)
-- [Examples](#️-examples)
-- [Changelog](#-changelog)
-- [Support](#-support)
-- [License](#-license)
-- [Related](#-related)
-- [Author](#-author)
+- [**Features**](#-features)
+- [**Motivation**](#-features)
+- [**Usage**](#-usage)
+- [**API**](#-api)
+  - [**Function-based**](#λ-function-based)
+  - [**Class-based**](#-class-based)
+- [**Examples**](#️-examples)
+- [**Changelog**](#-changelog)
+- [**Support**](#-support)
+- [**License**](#-license)
+- [**Related**](#-related)
+- [**Author**](#-author)
 
 <br>
 <br>
@@ -309,14 +309,14 @@ console.log(dir.readDirSync(testingPath)) // returns only .md (Markdown) files f
 
 ## 📝 Changelog
 
-📑 The changelog is available here, [CHANGELOG.md](https://github.com/igorskyflyer/npm-resursive-readdir/blob/main/CHANGELOG.md).
+📑 Read about the latest changes in the [**CHANGELOG.md**](https://github.com/igorskyflyer/npm-resursive-readdir/blob/main/CHANGELOG.md).
 
 <br>
 <br>
 
 ## 🪪 License
 
-Licensed under the MIT license which is available here, [MIT license](https://github.com/igorskyflyer/npm-resursive-readdir/blob/main/LICENSE).
+Licensed under the [**MIT license**](https://github.com/igorskyflyer/npm-resursive-readdir/blob/main/LICENSE).
 
 <br>
 <br>
