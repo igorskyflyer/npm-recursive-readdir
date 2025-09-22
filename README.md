@@ -369,7 +369,6 @@ Licensed under the [**MIT license**](https://github.com/igorskyflyer/npm-resursi
 > _🧰 Determines whether a given value can be a valid file/directory name. 🏜_
 
 <br>
-<br>
 
 ## 👨🏻‍💻 Author
 Created by **Igor Dimitrijević** ([*@igorskyflyer*](https://github.com/igorskyflyer/)).
