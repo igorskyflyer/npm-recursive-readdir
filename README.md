@@ -190,7 +190,7 @@ You can use the 2 predefined values or use an arbitrary value. The predefined va
 >
 > #### Why the default value of `maxDepth` is **_NOT_** `Depth.All`?
 >
-> Simple, because you need to explicitly set it to that value because traversal through all child subdirectories is very resource/time consuming, just imagine setting the `directory` parameter to the root of your drive and in conjunction with `maxDepth = Depth.All`. 
+> It is simple: the value must be explicitly set, since traversal through all child subdirectories is highly resource‑ and time‑consuming. For example, if the directory parameter were set to the root of a drive in combination with `maxDepth = Depth.All`, the operation could become extremely heavy.
 >
 
 <br>
