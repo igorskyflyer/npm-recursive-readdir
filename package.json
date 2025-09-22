@@ -1,55 +1,70 @@
 {
-	"name": "@igor.dvlpr/recursive-readdir",
-	"version": "2.1.5",
-	"description": "📖 Provides recursive readdir() and readdirSync() functions. 📁",
-	"engines": {
-		"node": ">=12.17"
-	},
-	"sideEffects": false,
-	"main": "./src/index",
-	"exports": {
-		".": {
-			"require": "./src/index.js",
-			"import": "./src/index.mjs"
-		}
-	},
-	"module": "./src/index.mjs",
-	"types": "./dist/index",
-	"files": [
-		"dist",
-		"src"
-	],
-	"scripts": {
-		"test": "mocha",
-		"pub": "npm test && tsc && npm publish --access public"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/igorskyflyer/npm-resursive-readdir.git"
-	},
-	"keywords": [
-		"readdir",
-		"folder",
-		"directory",
-		"recursive",
-		"files",
-		"igor.dvlpr"
-	],
-	"author": "Igor Dimitrijević <admin@igorskyflyer.me> (https://github.com/igorskyflyer)",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/igorskyflyer/npm-resursive-readdir/issues"
-	},
-	"homepage": "https://github.com/igorskyflyer/npm-resursive-readdir#readme",
-	"devDependencies": {
-		"@types/chai": "^4.3.4",
-		"@types/mocha": "^10.0.0",
-		"@types/node": "^12.17.0",
-		"chai": "^4.3.7",
-		"mocha": "^10.1.0",
-		"typescript": "^4.9.3"
-	},
-	"dependencies": {
-		"@igor.dvlpr/upath": "^2.1.2"
-	}
+    "name": "@igorskyflyer/recursive-readdir",
+    "version": "3.0.0",
+    "description": "📖 Fast, type-safe recursive directory reader for Node.js with depth control, entry filtering, and sync/async APIs. 📁",
+    "sideEffects": false,
+    "engines": {
+        "node": ">=22.0"
+    },
+    "type": "module",
+    "types": "./dist/index.d.ts",
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "test": "vitest --run",
+        "pub": "pnpm test && git push origin main --tags"
+    },
+    "keywords": [
+        "cross-platform",
+        "directory-listing",
+        "directory-recursion",
+        "directory-traversal",
+        "file-listing",
+        "file-system",
+        "filesystem-utility",
+        "filter-directories",
+        "filter-files",
+        "fs",
+        "igor dimitrijević",
+        "igorskyflyer",
+        "list-directories",
+        "list-files",
+        "max-depth",
+        "nodejs-utility",
+        "nodejs",
+        "path-utils",
+        "read-directory",
+        "recursive-directory",
+        "recursive-read",
+        "trailing-slash"
+    ],
+    "license": "MIT",
+    "author": "Igor Dimitrijević <support@igorskyflyer.me> (https://github.com/igorskyflyer)",
+    "funding": "https://ko-fi.com/igorskyflyer",
+    "homepage": "https://github.com/igorskyflyer/npm-resursive-readdir",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/igorskyflyer/npm-resursive-readdir.git"
+    },
+    "bugs": {
+        "url": "https://github.com/igorskyflyer/npm-resursive-readdir/issues"
+    },
+    "dependencies": {
+        "@igorskyflyer/upath": "^3.1.0"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^2.2.4",
+        "@igorskyflyer/biome-config": "^2.1.0",
+        "@types/node": "^22.18.0",
+        "typescript": "^5.9.2",
+        "vitest": "^3.2.4"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "packageManager": "pnpm@10.17.0"
 }
