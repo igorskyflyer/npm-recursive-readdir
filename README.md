@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/igorskyflyer/npm-resursive-readdir/main/media/recursive-readdir.png" alt="Icon of Recursive ReadDir" width="256" height="256">
+  <img src="https://raw.githubusercontent.com/igorskyflyer/npm-recursive-readdir/main/media/recursive-readdir.png" alt="Icon of Recursive ReadDir" width="256" height="256">
   <h1>Recursive ReadDir</h1>
 </div>
 
@@ -309,14 +309,14 @@ console.log(dir.readDirSync(testingPath)) // returns only .md (Markdown) files f
 
 ## 📝 Changelog
 
-📑 Read about the latest changes in the [**CHANGELOG.md**](https://github.com/igorskyflyer/npm-resursive-readdir/blob/main/CHANGELOG.md).
+📑 Read about the latest changes in the [**CHANGELOG.md**](https://github.com/igorskyflyer/npm-recursive-readdir/blob/main/CHANGELOG.md).
 
 <br>
 <br>
 
 ## 🪪 License
 
-Licensed under the [**MIT license**](https://github.com/igorskyflyer/npm-resursive-readdir/blob/main/LICENSE).
+Licensed under the [**MIT license**](https://github.com/igorskyflyer/npm-recursive-readdir/blob/main/LICENSE).
 
 <br>
 <br>
