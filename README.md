@@ -1,92 +1,81 @@
-## 🔁 Recursive `readdir()`
+<div align="center">
+  <img src="https://raw.githubusercontent.com/igorskyflyer/npm-resursive-readdir/main/media/recursive-readdir.png" alt="Icon of Recursive ReadDir" width="256" height="256">
+  <h1>Recursive ReadDir</h1>
+</div>
 
-<br>
+<blockquote align="center">
+  Recursive Directory Reading • Sync And Async Usage • Flexible Filters • Depth Control
+</blockquote>
 
-<p align="center">
-	<img src="https://raw.githubusercontent.com/igorskyflyer/npm-recursive-readdir/main/assets/recursive-readdir.png" alt="Recursive-Readdir logo" width="180" height="180">
-</p>
-
-<br>
-
-<p align="center">
-  <img src="https://github.com/igorskyflyer/npm-recursive-readdir/workflows/tests/badge.svg">
-</p>
-
-<br>
-<br>
-
-📖 Provides advanced recursive readdir() and readdirSync() functions with high-level of Node-compatibility and much more. 📁
+<h4 align="center">
+  📖 Fast, type-safe recursive directory reader for Node.js with depth control, entry filtering, and sync/async APIs. 📁
+</h4>
 
 <br>
 <br>
 
-> ❓ Did you know? 🤔
+## 📃 Table of Contents
 
-> I've built this npm module because I needed a reliable and efficient npm module for listing directories while building another one of my projects, a Visual Studio Code extension called **[New Folder](https://github.com/igorskyflyer/vscode-new-folder)** and I needed to create a custom QuickPick dialog allowing the user to pick a root directory.
+- [Features](#-features)
+- [Motivation](#-features)
+- [Usage](#-usage)
+- [API](#-api)
+  - [Function-based](#λ-function-based)
+  - [Class-based](#-class-based)
+- [Examples](#️-examples)
+- [Changelog](#-changelog)
+- [Support](#-support)
+- [License](#-license)
+- [Related](#-related)
+- [Author](#-author)
+
+<br>
+<br>
+
+## 🤖 Features
+
+- 📂 Reads directories recursively with precise depth control
+- 🎯 Filters results by files-only, directories-only, or all entries
+- ⚡ Supports both synchronous and asynchronous operations
+- 🧩 Accepts custom filter functions for advanced selection
+- ✨ Optionally adds trailing slashes to directory paths
+- 🛡️ Skips unreadable entries without stopping traversal
+- 🏗 Provides a fluent class API for easy configuration
+- 💻 Cross-platform paths, powered by [**uPath**](https://www.npmjs.com/package/@igorskyflyer/upath)
+
+<br>
+
+## 🎯 Motivation
+
+This npm module was built to provide a reliable and efficient way of listing directories while another project was being developed - a Visual Studio Code extension called [**New Folder**](https://github.com/igorskyflyer/vscode-new-folder), where a custom QuickPick dialog was required to allow the selection of a root directory.
 
 <br>
 <br>
 
-✨ Since `v.2.0.0` `recursive-readdir` is a hybrid module that supports both CommonJS (legacy) and ES modules, thanks to [Modern Module](https://github.com/igorskyflyer/npm-modern-module).
+## 🕵🏼 Usage
 
-<br>
+Install it by executing any of the following, depending on your preferred package manager:
 
-### Features
+```bash
+pnpm add @igorskyflyer/recursive-readdir
+```
 
-✅ both class-based and function-based approaches available,
+```bash
+yarn add @igorskyflyer/recursive-readdir
+```
 
-✅ TypeScript ready, declaration files (`d.ts`) included,
-
-✅ recursive traversal,
-
-✅ maximum depth of traversal configurability,
-
-✅ file-only filtering,
-
-✅ directory-only filtering,
-
-✅ file/directory path name filtering,
-
-✅ error detection methods,
-
-✅ file/directory inaccessibility detection methods,
-
-✅ multiple output formats,
-
-✅ directories optional trailing slash,
-
-✅ custom filter function,
-
-✅ async and sync methods available,
-
-✅ path-safety, see [uPath](https://www.npmjs.com/package/@igor.dvlpr/upath),
-
-✅ universal paths supported, see [uPath](https://www.npmjs.com/package/@igor.dvlpr/upath). 🎉
-
-<br>
-
-### Usage
-
-Install it by running:
-
-```shell
-npm i "@igor.dvlpr/recursive-readdir"
+```bash
+npm i @igorskyflyer/recursive-readdir
 ```
 
 <br>
-
-### API
-
-- [function-based](#λ-function-based),
-- [class-based](#-class-based)
-
 <br>
 
-#### λ Function-based
+## 🤹🏼 API
 
-<br>
+### λ Function-based
 
-```js
+```ts
 async function readDir(directory, options): Promise<string[]>
 ```
 
@@ -102,7 +91,7 @@ _**options**_: `RecursiveDirOptions` - additional options.
 
 <br>
 
-```js
+```ts
  function readDirSync(directory, options): string[]
 ```
 
@@ -118,7 +107,7 @@ _**options**_: `RecursiveDirOptions` - additional options.
 
 <br>
 
-#### 💎 Class-based
+### 💎 Class-based
 
 For own convenience and code-reuse you can use the class-based approach.
 
@@ -126,16 +115,15 @@ Define the options once and (re)call the `readDirSync()`/`readDir()` when needed
 
 <br>
 
-```js
+```ts
 class RecursiveDir
 ```
 
 <br>
-<br>
 
 **Available methods**
 
-```js
+```ts
 function readDirSync(directory): string[]
 ```
 
@@ -149,7 +137,7 @@ _**directory**_: `String` - the directory whose files/directories should be list
 
 <br>
 
-```js
+```ts
 function readDir(directory): Promise<string[]>
 ```
 
@@ -163,7 +151,7 @@ _**directory**_: the directory whose files/directories should be listed.
 
 <br>
 
-```js
+```ts
 function entries(value): RecursiveDir
 ```
 
@@ -178,7 +166,7 @@ Sets the **entries** property which controls whether to list files-only, directo
 
 <br>
 
-```js
+```ts
 function maxDepth(value): RecursiveDir
 ```
 
@@ -224,7 +212,7 @@ The value of `0` means that only directory entries found in the directory specif
 
 `maxDepth = Depth.Root`
 
-```js
+```ts
 maxDepth(Depth.Root)
 // return only the files/directories in the current directory
 ```
@@ -233,7 +221,7 @@ maxDepth(Depth.Root)
 
 `maxDepth = 3`
 
-```js
+```ts
 maxDepth(3)
 // return the files/directories in the current director files/directories 3-levels deep
 ```
@@ -242,7 +230,7 @@ maxDepth(3)
 
 `maxDepth = Depth.All`
 
-```js
+```ts
 maxDepth(Depth.All)
 // return all child files/directories in the current directory
 ```
@@ -250,7 +238,7 @@ maxDepth(Depth.All)
 <br>
 <br>
 
-```js
+```ts
 function filter(value): RecursiveDir
 ```
 
@@ -265,7 +253,7 @@ _value_: `FilterCallback` - the filter function to use when filtering directory 
 <br>
 <br>
 
-```js
+```ts
 function addTrailingSlash(value): RecursiveDir
 ```
 
@@ -280,11 +268,11 @@ _value_: `boolean` - a Boolean indicating whether a trailing slash should be add
 <br>
 <br>
 
-#### Examples
+## 🗒️ Examples
 
-```js
-const { readDirSync, Depth, Entry, RecursiveDir } = require('@igor.dvlpr/recursive-readdir')
-const testingPath = './somePath'
+```ts
+import { readDirSync, Depth, Entry, RecursiveDir } from '@igorskyflyer/recursive-readdir'
+const testingPath: string = './somePath'
 
 // Function-based approach
 
@@ -315,7 +303,7 @@ console.log(
 
 // Class-based approach
 
-const dir = new RecursiveDir()
+const dir: RecursiveDir = new RecursiveDir()
 
 dir
   .maxDepth(Depth.All)
@@ -326,3 +314,72 @@ console.log(dir.readDirSync(testingPath)) // returns only .md (Markdown) files f
 ```
 
 <br>
+<br>
+
+## 📝 Changelog
+
+📑 The changelog is available here, [CHANGELOG.md](https://github.com/igorskyflyer/npm-resursive-readdir/blob/main/CHANGELOG.md).
+
+<br>
+<br>
+
+## 🪪 License
+
+Licensed under the MIT license which is available here, [MIT license](https://github.com/igorskyflyer/npm-resursive-readdir/blob/main/LICENSE).
+
+<br>
+<br>
+
+## 💖 Support
+
+<div align="center">
+  I work hard for every project, including this one and your support means a lot to me!
+  <br>
+  Consider buying me a coffee. ☕
+  <br>
+  <br>
+  <a href="https://ko-fi.com/igorskyflyer" target="_blank"><img src="https://raw.githubusercontent.com/igorskyflyer/igorskyflyer/main/assets/ko-fi.png" alt="Donate to igorskyflyer" width="180" height="46"></a>
+  <br>
+  <br>
+  <em>Thank you for supporting my efforts!</em> 🙏😊
+</div>
+
+<br>
+<br>
+
+## 🧬 Related
+
+[**@igorskyflyer/unc-path**](https://www.npmjs.com/package/@igorskyflyer/unc-path)
+
+> _🥽 Provides ways of parsing UNC paths and checking whether they are valid. 🎱_
+
+<br>
+
+[**@igorskyflyer/comment-it**](https://www.npmjs.com/package/@igorskyflyer/comment-it)
+
+> _📜 Formats the provided string as a comment, either a single or a multi line comment for the given programming language. 💻_
+
+<br>
+
+[**@igorskyflyer/upath**](https://www.npmjs.com/package/@igorskyflyer/upath)
+
+> _🎍 Provides a universal way of formatting file-paths in Unix-like and Windows operating systems as an alternative to the built-in path.normalize(). 🧬_
+
+<br>
+
+[**@igorskyflyer/valid-path**](https://www.npmjs.com/package/@igorskyflyer/valid-path)
+
+> _🧰 Determines whether a given value can be a valid file/directory name. 🏜_
+
+<br>
+
+[**@igorskyflyer/strip-html**](https://www.npmjs.com/package/@igorskyflyer/strip-html)
+
+> _🥞 Removes HTML code from the given string. Can even extract text-only from the given an HTML string. ✨_
+
+<br>
+<br>
+<br>
+
+## 👨🏻‍💻 Author
+Created by **Igor Dimitrijević** ([*@igorskyflyer*](https://github.com/igorskyflyer/)).
