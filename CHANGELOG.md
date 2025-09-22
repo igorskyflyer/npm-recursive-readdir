@@ -1,6 +1,6 @@
 # 📒 Changelog
 
-### of [@igorskyflyer/recursive-readdir](https://github.com/igorskyflyer/npm-resursive-readdir)
+### of [@igorskyflyer/recursive-readdir](https://github.com/igorskyflyer/npm-recursive-readdir)
 
 <br>
 
