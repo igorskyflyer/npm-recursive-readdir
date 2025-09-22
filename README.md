@@ -50,7 +50,6 @@
 This npm module was built to provide a reliable and efficient way of listing directories while another project was being developed - a Visual Studio Code extension called [**New Folder**](https://github.com/igorskyflyer/vscode-new-folder), where a custom QuickPick dialog was required to allow the selection of a root directory.
 
 <br>
-<br>
 
 ## 🕵🏼 Usage
 
