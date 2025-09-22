@@ -75,7 +75,7 @@ npm i @igorskyflyer/recursive-readdir
 ### λ Function-based
 
 ```ts
-async function readDir(directory, options): Promise<string[]>
+async function readDir(directory: string, options: RecursiveDirOptions): Promise<string[]>
 ```
 
 Asynchronously gets files/directories inside the given directory.
@@ -84,14 +84,14 @@ Asynchronously gets files/directories inside the given directory.
 
 **Params**
 
-_**directory**_: `String` - the directory whose files/directories should be listed,
+_**directory**_: `string` - the directory whose files/directories should be listed,
 
 _**options**_: `RecursiveDirOptions` - additional options.
 
 <br>
 
 ```ts
- function readDirSync(directory, options): string[]
+ function readDirSync(directory: string, options: RecursiveDirOptions): string[]
 ```
 
 Synchronously gets files/directories inside the given directory.
@@ -100,7 +100,7 @@ Synchronously gets files/directories inside the given directory.
 
 **Params**
 
-_**directory**_: `String` - the directory whose files/directories should be listed,
+_**directory**_: `string` - the directory whose files/directories should be listed,
 
 _**options**_: `RecursiveDirOptions` - additional options.
 
@@ -123,7 +123,7 @@ class RecursiveDir
 **Available methods**
 
 ```ts
-function readDirSync(directory): string[]
+function readDirSync(directory: string): string[]
 ```
 
 Synchronously gets files/directories inside the given directory.
@@ -132,12 +132,12 @@ Synchronously gets files/directories inside the given directory.
 
 **Params**
 
-_**directory**_: `String` - the directory whose files/directories should be listed.
+_**directory**_: `string` - the directory whose files/directories should be listed.
 
 <br>
 
 ```ts
-function readDir(directory): Promise<string[]>
+function readDir(directory: string): Promise<string[]>
 ```
 
 Asynchronously gets files/directories inside the given directory.
@@ -146,12 +146,12 @@ Asynchronously gets files/directories inside the given directory.
 
 **Params**
 
-_**directory**_: the directory whose files/directories should be listed.
+_**directory**_: `string` - the directory whose files/directories should be listed.
 
 <br>
 
 ```ts
-function entries(value): RecursiveDir
+function entries(value: Entry): RecursiveDir
 ```
 
 Sets the **entries** property which controls whether to list files-only, directories-only or **both** (**default**).
@@ -166,7 +166,7 @@ Sets the **entries** property which controls whether to list files-only, directo
 <br>
 
 ```ts
-function maxDepth(value): RecursiveDir
+function maxDepth(value: Depth): RecursiveDir
 ```
 
 Sets **maxDepth** which controls how many child directories' entries are being listed.
@@ -238,7 +238,7 @@ maxDepth(Depth.All)
 <br>
 
 ```ts
-function filter(value): RecursiveDir
+function filter(value: FilterCallback): RecursiveDir
 ```
 
 Sets **filter** predicate function used for filtering directory entries (directories/files).
@@ -253,7 +253,7 @@ _value_: `FilterCallback` - the filter function to use when filtering directory 
 <br>
 
 ```ts
-function addTrailingSlash(value): RecursiveDir
+function addTrailingSlash(value: boolean): RecursiveDir
 ```
 
 Sets whether a trailing slash should be added to directory entries.
