@@ -45,13 +45,13 @@
     "license": "MIT",
     "author": "Igor Dimitrijević <support@igorskyflyer.me> (https://github.com/igorskyflyer)",
     "funding": "https://ko-fi.com/igorskyflyer",
-    "homepage": "https://github.com/igorskyflyer/npm-resursive-readdir",
+    "homepage": "https://github.com/igorskyflyer/npm-recursive-readdir",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/igorskyflyer/npm-resursive-readdir.git"
+        "url": "git+https://github.com/igorskyflyer/npm-recursive-readdir.git"
     },
     "bugs": {
-        "url": "https://github.com/igorskyflyer/npm-resursive-readdir/issues"
+        "url": "https://github.com/igorskyflyer/npm-recursive-readdir/issues"
     },
     "dependencies": {
         "@igorskyflyer/upath": "^3.1.0"
