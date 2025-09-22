@@ -352,6 +352,12 @@ Licensed under the [**MIT license**](https://github.com/igorskyflyer/npm-resursi
 
 <br>
 
+[**@igorskyflyer/strip-html**](https://www.npmjs.com/package/@igorskyflyer/strip-html)
+
+> _🥞 Removes HTML code from the given string. Can even extract text-only from the given an HTML string. ✨_
+
+<br>
+
 [**@igorskyflyer/upath**](https://www.npmjs.com/package/@igorskyflyer/upath)
 
 > _🎍 Provides a universal way of formatting file-paths in Unix-like and Windows operating systems as an alternative to the built-in path.normalize(). 🧬_
@@ -361,12 +367,6 @@ Licensed under the [**MIT license**](https://github.com/igorskyflyer/npm-resursi
 [**@igorskyflyer/valid-path**](https://www.npmjs.com/package/@igorskyflyer/valid-path)
 
 > _🧰 Determines whether a given value can be a valid file/directory name. 🏜_
-
-<br>
-
-[**@igorskyflyer/strip-html**](https://www.npmjs.com/package/@igorskyflyer/strip-html)
-
-> _🥞 Removes HTML code from the given string. Can even extract text-only from the given an HTML string. ✨_
 
 <br>
 <br>
