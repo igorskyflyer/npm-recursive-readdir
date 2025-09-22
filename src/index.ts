@@ -192,7 +192,10 @@ export async function readDir(
  * @param {RecursiveDirOptions} [options] additional options
  * @returns {string[]} returns string[]
  */
-export function readDirSync(directory: any, options: any): string[] {
+export function readDirSync(
+  directory: string,
+  options: RecursiveDirOptions
+): string[] {
   return recursiveDirSync(directory, options)
 }
 
